@@ -8,25 +8,28 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-function t(name) {
-    console.log('0.params: ', name);
-    return function (target, propertyKey, descriptor) {
-        console.log("0.t(): called");
-        // console.log(target);
-        console.log(propertyKey);
-        // console.log(descriptor);
-        target.getName('Tinh Ngo');
-    };
+Object.defineProperty(exports, "__esModule", { value: true });
+require("reflect-metadata");
+const formatMetadataKey = Symbol("format");
+function format(formatString) {
+    return Reflect.metadata(formatMetadataKey, formatString);
 }
-class Demo {
-    getName(name) {
-        this.name = name;
-        console.log('1.hello: ' + name);
+function getFormat(target, propertyKey) {
+    return Reflect.getMetadata(formatMetadataKey, target, propertyKey);
+}
+class Greeter {
+    constructor(message) {
+        this.greeting = message;
+    }
+    greet() {
+        let formatString = getFormat(this, "greeting");
+        return formatString.replace("%s", this.greeting);
     }
 }
 __decorate([
-    t('tinhngo'),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
-], Demo.prototype, "getName", null);
+    format("Hello, %s"),
+    __metadata("design:type", String)
+], Greeter.prototype, "greeting", void 0);
+let greeter = new Greeter('tinh ngo');
+console.log(greeter);
+console.log(greeter.greet());

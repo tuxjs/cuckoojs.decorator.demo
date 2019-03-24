@@ -1,4 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 // import './function';
-require("./class");
+// import './class';
+// import './accessor';
+// import './property';
+require("./parameter");
+// import './test';

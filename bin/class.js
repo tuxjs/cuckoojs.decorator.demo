@@ -1,17 +1,4 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -23,37 +10,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 function classDecorator(constructor) {
     // console.log(constructor);
-    var ObjectNew = /** @class */ (function (_super) {
-        __extends(class_1, _super);
-        function class_1() {
-            var _this = _super !== null && _super.apply(this, arguments) || this;
-            _this.newProperty = "new property";
-            _this.hello = "override";
-            return _this;
+    var ObjectNew = class extends constructor {
+        constructor() {
+            super(...arguments);
+            this.newProperty = "new property";
+            this.hello = "override";
         }
-        return class_1;
-    }(constructor));
+    };
     ObjectNew.prototype.getProperty = function () {
         console.log('get Property');
         return this.property;
     };
     return ObjectNew;
 }
-var Greeter = /** @class */ (function () {
-    function Greeter(m) {
+let Greeter = class Greeter {
+    constructor(m) {
         this.property = "property";
         this.hello = m;
     }
-    Greeter.prototype.setProperty = function (property) {
+    setProperty(property) {
         this.property = property;
-    };
-    Greeter = __decorate([
-        classDecorator,
-        __metadata("design:paramtypes", [String])
-    ], Greeter);
-    return Greeter;
-}());
-var greeter = new Greeter('hello world');
+    }
+};
+Greeter = __decorate([
+    classDecorator,
+    __metadata("design:paramtypes", [String])
+], Greeter);
+let greeter = new Greeter('hello world');
 greeter.setProperty('tinh ngo');
 console.log(greeter.getProperty());
 // console.log(new Greeter("world"));
